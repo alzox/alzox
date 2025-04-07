@@ -1,0 +1,2 @@
+# ragebaiter
+funny discord bot
