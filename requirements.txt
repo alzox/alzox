@@ -1,2 +1,3 @@
 discord.py
 llama-cpp-python
+huggingface-hub

@@ -5,15 +5,16 @@ funny discord bot
 ```
 discord.py
 llama-cpp-python
-pip install requirements.txt
+huggingface-hub
+pip install -r "requirements.txt"
 ```
 
 ## usage
 
 1. make an application at https://discord.com/developers/applications
-2. get your token from https://discord.com/developers/applications/$APPID$/bot
-3. set message content intent enabled ^
-4. generate a link from https://discord.com/developers/applications/$APPID$/oauth2
+2. get your token from the bot tab
+3. set message content intent enabled in the same tab
+4. generate a link from oauth2 with bot and send message permissions
 5. setenv to contain that token w/ name: DISCORD_TOKEN
 ```
 PS: $ENV:DISCORD_TOKEN="$TOKEN$"
