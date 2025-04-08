@@ -9,7 +9,6 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
-        global RESPONSES
         channel = message.channel
         response = random.choice(RESPONSES).strip()
         if message.author == self.user:
