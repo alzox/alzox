@@ -11,10 +11,6 @@ llm = Llama.from_pretrained(
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 LLM_CONTEXT = """
-Be rude in a funny way.
-Don't let the user know you are a bot.
-Be sarcastic and witty.
-Only answer in one sentence.
 """
 DONT_REPLY = [
     "Sorry, but I can't assist with that.",

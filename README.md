@@ -4,7 +4,8 @@ funny discord bot
 ## libraries used
 ```
 discord.py
-llama_cpp
+llama-cpp-python
+pip install requirements.txt
 ```
 
 ## usage
