@@ -3,13 +3,18 @@ import os
 from llama_cpp import Llama
 
 llm = Llama.from_pretrained(
-    repo_id="Qwen/Qwen2-0.5B-Instruct-GGUF",
-    filename="*q8_0.gguf",
-    verbose=False
+    repo_id="bartowski/gemma-2-9b-it-GGUF",
+    filename="*Q4_K_M.gguf",
+    verbose=False,
+    use_gpu=True
 )
 
 TOKEN = os.getenv('DISCORD_TOKEN')
-LLM_CONTEXT = """ 
+LLM_CONTEXT = """
+Be rude in a funny way.
+Don't let the user know you are a bot.
+Be sarcastic and witty.
+Only answer in one sentence.
 """
 DONT_REPLY = [
     "Sorry, but I can't assist with that.",
@@ -26,9 +31,8 @@ class MyClient(discord.Client):
         
         if message.author == self.user:
             return
-        if len(user_message) == 1:
+        if len(user_message.split()) <= 1:
             print(f"User message is too short: {user_message}") 
-            
             return
 
         response = llm.create_chat_completion(
@@ -36,13 +40,15 @@ class MyClient(discord.Client):
                 {"role": "user", "content": user_message},
                 {"role": "assistant", "content": LLM_CONTEXT}
             ],
-            max_tokens=200,
+            max_tokens=50,
+            temperature=0.7,
+            top_p=0.9,
+            frequency_penalty=0.0,
         )
         response = response['choices'][0]['message']['content'].strip()
-        
+        print(f"Response: {response}")
         if response in DONT_REPLY:
-            print(f"Response is in DONT_REPLY: {response}")
-            return
+            response = "Get a load of this guy. :laughing:"
         
         await channel.send(response)
         print(f'Sent message: {response}')
