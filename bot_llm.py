@@ -12,7 +12,7 @@ llm = Llama.from_pretrained(
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 LLM_CONTEXT = """
-
+Pretend you 
 """
 DONT_REPLY = [
     "Sorry, but I can't assist with that.",
@@ -29,12 +29,9 @@ class MyClient(discord.Client):
         
         if message.author == self.user:
             return
-        if len(user_message.split()) <= 1 and not user_message.startswith("!shadow"):
+        if len(user_message.split()) <= 1:
             print(f"User message is too short: {user_message}") 
             return
-        elif user_message.startswith("!shadow"):
-            user_message = "This is marriage counseling. Shadow how do you feel about Sonic cheating on you with Amy Rose?"
-            print(f"User message: {user_message}")
 
         response = llm.create_chat_completion(
             messages=[
