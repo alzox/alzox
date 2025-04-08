@@ -8,13 +8,18 @@ llama_cpp
 ```
 
 ## usage
-```
-get your token from https://discord.com/developers/applications/$APPID$/bot
-set message content intent enabled ^
-generate a link from https://discord.com/developers/applications/$APPID$/oauth2
-run the file locally or host it somewhere
-```
 
+1. make an application at https://discord.com/developers/applications
+2. get your token from https://discord.com/developers/applications/$APPID$/bot
+3. set message content intent enabled ^
+4. generate a link from https://discord.com/developers/applications/$APPID$/oauth2
+5. setenv to contain that token w/ name: DISCORD_TOKEN
+```
+PS: $ENV:DISCORD_TOKEN="$TOKEN$"
+CMD: set DISCORD_TOKEN=your_token_here
+BASH: export DISCORD_TOKEN="$TOKEN$"
+``` 
+6. run the file locally or host it somewhere
 
 ## understanding discord bot architecture
 
@@ -27,4 +32,5 @@ run the file locally or host it somewhere
 ## notes to self
 
 * remember to await any operation that seems like i/o
-* prmopt engineering is really funny
+* prompt engineering is really funny
+* this makes me sad that most comment sections are just "this"
