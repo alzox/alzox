@@ -1,5 +1,5 @@
 # ragebaiter
-funny discord bot
+me playing around and getting a minimal bot set-up. share this with your friends to make an annoying bot as well :D.
 
 ## libraries used
 ```
