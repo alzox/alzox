@@ -15,9 +15,10 @@ bot = commands.Bot(command_prefix="/", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user} (id: {bot.user.id})")
+    print(f"Logged in as {bot.user}")
     await bot.tree.sync() # sync's auto fill commands
     print("Synced global app commands")
+
 
 def _roll_notation_reply(notation: str) -> str:
     """Parse notation and return a reply string. Raises ValueError for invalid input."""
@@ -46,6 +47,7 @@ def _roll_notation_reply(notation: str) -> str:
         return f"Rolled 1d{sides}: {rolls[0]}"
     return f"Rolled {count}d{sides}: {rolls} => total {total}"
 
+
 @bot.tree.command(name="dice", description="Roll dice. Examples: 2d6, d20, 6")
 @discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def slash_dice(interaction: discord.Interaction, notation: str = "1d6"):
@@ -57,6 +59,7 @@ async def slash_dice(interaction: discord.Interaction, notation: str = "1d6"):
 
     await interaction.response.send_message(reply)
     
+
 STATUS = "" # only let me set it
 @bot.tree.command(name="status", description="Check what @alzox is up to")
 @discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
@@ -81,6 +84,7 @@ async def tutorial(interaction: discord.Interaction):
 async def hello_world(interaction: discord.Interaction):
     await interaction.response.send_message("Hello World!")
     return 
+
 
 @bot.event
 async def on_command_error(ctx: commands.Context, error: Exception):

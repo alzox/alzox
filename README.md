@@ -1,5 +1,7 @@
 # alzox 
 
+Make a [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) to get started!
+
 ## libraries used
 ```
 discord.py
