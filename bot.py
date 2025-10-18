@@ -3,7 +3,6 @@ import random
 import re
 import discord
 from discord.ext import commands
-from llama_cpp import Llama
 
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -66,7 +65,7 @@ async def status(interaction: discord.Interaction, status: str = "[status input]
     global STATUS
     if await bot.is_owner(interaction.user) and status != "[status input]":
         STATUS = status
-        await interaction.response.send_message(STATUS)
+        await interaction.response.send_message("Status Successfully Set!")
         return
     else:
         await interaction.response.send_message(STATUS)
