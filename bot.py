@@ -4,7 +4,6 @@ import re
 import discord
 from discord.ext import commands
 
-
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 # Intents: message_content is required for reading message text
