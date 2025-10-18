@@ -70,6 +70,18 @@ async def status(interaction: discord.Interaction, status: str = "[status input]
         await interaction.response.send_message(STATUS)
         return
 
+@bot.tree.command(name="tutorial", description="Host your own app")
+@discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+async def tutorial(interaction: discord.Interaction):
+    await interaction.response.send_message("https://alzox.carrd.co")
+    return
+
+@bot.tree.command(name="hello_world", description="Hello World!")
+@discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+async def hello_world(interaction: discord.Interaction):
+    await interaction.response.send_message("Hello World!")
+    return 
+
 @bot.event
 async def on_command_error(ctx: commands.Context, error: Exception):
     if isinstance(error, commands.MissingRequiredArgument):

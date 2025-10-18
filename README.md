@@ -40,6 +40,8 @@ I have simple examples in bot.py that can be used as a starting template for bot
 
 This is probably a really insufficient explanation, but google is a good friend and the documentation for discord.py is [here](https://discordpy-reborn.readthedocs.io/en/latest/index.html).
 
+There are some pre-specified functions that you can implement with @bot.event like on_ready or on_command_error.
+
 ## running on start-up
 
 To have your bot running while your computer is on everytime you can configure it to run on start-up. All it requires is you have set your DISCORD_TOKEN globally.
