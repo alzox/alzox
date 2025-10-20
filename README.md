@@ -5,6 +5,7 @@ Make a [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-r
 ## libraries used
 ```
 discord.py
+aiohttp
 pip install -r requirements.txt
 ```
 

@@ -2,6 +2,7 @@ import os
 import random
 import re
 import discord
+import aiohttp
 from discord.ext import commands
 
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -60,7 +61,7 @@ async def slash_dice(interaction: discord.Interaction, notation: str = "1d6"):
     await interaction.response.send_message(reply)
     
 
-STATUS = "" # only let me set it
+STATUS = "x_x" # only let me set it
 @bot.tree.command(name="status", description="Check what @alzox is up to")
 @discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def status(interaction: discord.Interaction, status: str = "[status input]"):
@@ -83,6 +84,45 @@ async def tutorial(interaction: discord.Interaction):
 @discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def hello_world(interaction: discord.Interaction):
     await interaction.response.send_message("Hello World!")
+    return 
+
+@bot.tree.command(name="wikipedia", description="Returns main result for a wikipedia search")
+@discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+async def wikipedia(interaction: discord.Interaction, topic: str):
+    await interaction.response.defer() # acknowledge but await for request to finish
+    
+    try:
+        url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + topic.replace(" ", "_")
+        headers = {
+            'User-Agent': 'DiscordBot/1.0 (Discord Wikipedia Bot; Python/aiohttp)'
+        }
+        
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    
+                    title = data.get("title", "No title")
+                    extract = data.get("extract", "No summary available")
+                    page_url = data.get("content_urls", {}).get("desktop", {}).get("page", "")
+                    
+                    embed = discord.Embed(
+                        title=title,
+                        description=extract[:300] + ("..." if len(extract) > 300 else ""),
+                        color=discord.Color.blue(),
+                        url=page_url
+                    )
+                    
+                    if "thumbnail" in data:
+                        embed.set_thumbnail(url=data["thumbnail"]["source"])
+                    await interaction.followup.send(embed=embed)
+                elif response.status == 403:
+                    await interaction.followup.send(f"403 blockedd")
+                else:
+                    await interaction.followup.send(f"{response.status}")
+    except Exception as e:
+        await interaction.followup.send(f"something bad has happened") 
+
     return 
 
 
